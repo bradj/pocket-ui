@@ -1,0 +1,16 @@
+<script lang="ts">
+	import Nav from '../components/Nav.svelte';
+
+	export let segment: string;
+</script>
+
+<style>
+</style>
+
+<Nav {segment}/>
+
+<main>
+  <section class="section">
+    <slot></slot>
+  </section>
+</main>

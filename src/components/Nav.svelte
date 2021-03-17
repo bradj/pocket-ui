@@ -1,5 +1,7 @@
 <script>
-  import { link } from 'svelte-spa-router';
+  import { logout } from '$api';
+import { loggedIn } from '$store';
+import { link } from 'svelte-spa-router';
 
 </script>
 
@@ -19,16 +21,18 @@
   <div id="navbarBasicExample" class="navbar-menu">
     <div class="navbar-start">
     </div>
-
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button is-primary">
-            <strong>Sign up</strong>
+          {#if !$loggedIn}
+          <a class="button is-primary" href="/login" use:link>
+            <strong>Log in</strong>
           </a>
-          <a class="button is-light" href="/login" use:link>
-            Log in
+          {:else}
+          <a class="button is-light" on:click="{logout}">
+            <strong>Log out</strong>
           </a>
+          {/if}
         </div>
       </div>
     </div>

@@ -50,6 +50,7 @@ export default {
       entries: [
         { find: '$components', replacement: `${projectRootDir}/components` },
         { find: '$api', replacement: `${projectRootDir}/api` },
+        { find: '$store', replacement: `${projectRootDir}/stores` },
         { find: '$root', replacement: `${projectRootDir}` }
       ]
     }),

@@ -9,6 +9,13 @@ import Router from 'svelte-spa-router';
 <section class="section">
   <Router {routes} />
 </section>
+<footer class="footer">
+  <div class="content has-text-centered">
+    <p>
+      <strong>Pocket</strong> by <a href="bradjanke.com">Brad Janke</a>.
+    </p>
+  </div>
+</footer>
 
 <style>
 </style>

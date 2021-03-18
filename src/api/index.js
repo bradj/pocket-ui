@@ -3,7 +3,7 @@ import axios from 'axios';
 import { push } from 'svelte-spa-router';
 
 const instance = axios.create({
-  baseURL: 'http://localhost:3001/'
+  baseURL: 'http://localhost:8080/api/'
 });
 
 export const login = async (username, password) => {
@@ -13,9 +13,7 @@ export const login = async (username, password) => {
     });
 
     user.set({...res.data.user});
-    loggedIn.set(true);
-    
-    instance.defaults.headers.common['Authorization'] = `Bearer ${res.data.access_token}`;
+    loggedIn.set(true);    
   } catch (error) {
     console.log(error);
   }

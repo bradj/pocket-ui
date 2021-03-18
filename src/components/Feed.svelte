@@ -12,7 +12,7 @@ import { onMount } from 'svelte';
 {#each $currentFeed as item}
 <div class="columns">
   <div class="column is-three-quarters">
-    <p>Location: {item.location}</p>
+    <img src="{`http://localhost:8080/api${item.location}`}" alt="">
     <p>Caption: {item.caption}</p>
     <p>Date: {item.created_at}</p>
   </div>

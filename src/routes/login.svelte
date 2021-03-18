@@ -16,6 +16,7 @@
 	});
   
   async function handleSubmit() {
+    console.log('HandleSubmit', username, password);
     await login(username, password);
   }
 
@@ -47,7 +48,7 @@
       </div>
       <div class="field">
         <p class="control">
-          <button class="button is-success" on:click="{handleSubmit}">
+          <button class="button is-success">
             Login
           </button>
         </p>

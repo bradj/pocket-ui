@@ -1,9 +1,11 @@
 <script>
   import { logout } from '$api';
-import { loggedIn } from '$store';
-import { link } from 'svelte-spa-router';
+  import { loggedIn } from '$store';
+  import { link,push } from 'svelte-spa-router';
 
-
+  const uploadClick = () => {
+    push('/upload');
+  }
 </script>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -30,9 +32,12 @@ import { link } from 'svelte-spa-router';
             <strong>Log in</strong>
           </a>
           {:else}
-          <a class="button is-primary" href="/upload" use:link>
-            <strong>Upload</strong>
-          </a>
+          <button class="button is-primary is-rounded is-light" on:click="{uploadClick}">
+            <span class="icon is-large">
+              <ion-icon name="cloud-upload-outline"></ion-icon>
+            </span>
+            <span><strong>Upload</strong></span>
+          </button>
           <a class="button is-light" on:click="{logout}">
             <strong>Log out</strong>
           </a>

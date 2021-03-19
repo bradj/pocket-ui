@@ -16,7 +16,6 @@
 	});
   
   async function handleSubmit() {
-    console.log('HandleSubmit', username, password);
     await login(username, password);
   }
 

@@ -1,10 +1,5 @@
 import { currentFeed, loggedIn, user } from '$store';
-import axios from 'axios';
 import { push } from 'svelte-spa-router';
-
-const instance = axios.create({
-  baseURL: 'http://localhost:8080/api/'
-});
 
 const baseURL = 'http://localhost:8080/api';
 
@@ -53,8 +48,18 @@ export const logout = async () => {
 
 export const getFeed = async (username) => {
   try {
-    const res = await instance.get(`/u/${username}`);
-    currentFeed.set(res.data);
+    const res = await fetch(getUrl(`/u/${username}`), {
+      method: 'GET'
+    });
+
+    if (!res.ok) {
+      console.log('Get Feed error', res.status, res.statusText);
+      return;
+    }
+
+    const body = await res.json();
+
+    currentFeed.set(body);
   } catch (error) {
     console.log(error);
   }
@@ -62,12 +67,45 @@ export const getFeed = async (username) => {
 
 export const activeSession = async () => {
   try {
-    const res = await instance.get(`/u`);
+    const res = await fetch(getUrl(`/u`), {
+      method: 'GET'
+    });
+
+    if (!res.ok) {
+      console.log('Active Session error', res.status, res.statusText);
+      return;
+    }
+
+    const body = await res.json();
 
     loggedIn.set(true);
-    user.set({ ...res.data })
+    user.set({ ...body })
   } catch (error) {
     loggedIn.set(false);
     user.set(null);
   }
+}
+
+export const createPost = async (username, file, caption) => {
+  try {
+    const formData = new FormData();
+
+    formData.append('caption', caption);
+    formData.append('image', file);
+
+    const res = await fetch(getUrl(`/u/${username}`), {
+      method: 'POST',
+      body: formData
+    });
+
+    if (!res.ok) {
+      console.log('Upload error', res.status, res.statusText);
+      return false;
+    }
+  } catch (error) {
+    console.log('Upload error', error);
+    return false;
+  }
+
+  return true;
 }

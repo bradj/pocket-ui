@@ -4,7 +4,12 @@ import { currentFeed,user } from '$store';
 import { onMount } from 'svelte';
 
 
+
   onMount(async () => {
+    if (!$user) {
+      return;
+    }
+    
     await getFeed($user.username);
   })
 </script>

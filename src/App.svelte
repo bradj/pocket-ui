@@ -1,8 +1,13 @@
 <script>
-	import Nav from '$components/Nav.svelte';
+	import { activeSession } from '$api';
+import Nav from '$components/Nav.svelte';
 import routes from '$root/routes';
+import { beforeUpdate } from 'svelte';
 import Router from 'svelte-spa-router';
 
+	beforeUpdate(async () => {
+		await activeSession();
+	});
 </script>
 
 <Nav />

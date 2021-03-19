@@ -9,3 +9,10 @@ Web interface for [Pocket](https://github.com/bradj/pocket)
 1. `npm install`
 1. `npm run build`
 1. `npm start` or `npm run dev`
+
+## Helpful Links
+
+1. <https://ionicons.com/usage>
+1. <https://www.pixeltrue.com/free-packs/error-state>
+1. <https://www.manypixels.co/gallery>
+1. <https://www.iconshock.com/svg-icons/>

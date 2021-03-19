@@ -3,6 +3,7 @@
 import { loggedIn } from '$store';
 import { link } from 'svelte-spa-router';
 
+
 </script>
 
 <nav class="navbar" role="navigation" aria-label="main navigation">
@@ -29,6 +30,9 @@ import { link } from 'svelte-spa-router';
             <strong>Log in</strong>
           </a>
           {:else}
+          <a class="button is-primary" href="/upload" use:link>
+            <strong>Upload</strong>
+          </a>
           <a class="button is-light" on:click="{logout}">
             <strong>Log out</strong>
           </a>

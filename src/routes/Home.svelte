@@ -1,10 +1,9 @@
 <script>
   import Feed from '$components/Feed.svelte';
-import { loggedIn,user } from '$store';
-import { onDestroy } from 'svelte';
-import { push } from 'svelte-spa-router';
+  import { loggedIn,user } from '$store';
+  import { onDestroy } from 'svelte';
+  import { push } from 'svelte-spa-router';  
 
-  
   const loggedInUnsub = loggedIn.subscribe(value => {
 		if (value === false) {
       push('/login');
@@ -20,6 +19,10 @@ import { push } from 'svelte-spa-router';
   onDestroy(loggedInUnsub);
   onDestroy(userUnsub);
 </script>
+
+<svelte:head>
+	<title>Pocket</title>
+</svelte:head>
 
 <div class="container is-max-desktop">
   <Feed />

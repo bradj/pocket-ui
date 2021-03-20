@@ -8,10 +8,16 @@
   }
 </script>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
+<style>
+  .navbar {
+    border-bottom: 1px solid #d3d3d3;
+  }
+</style>
+
+<nav class="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     <a class="navbar-item" href="/" use:link>
-      <h1 class="title is-1">Pocket</h1>
+      <h1 class="title is-1 has-text-grey">Pocket</h1>
     </a>
 
     <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">

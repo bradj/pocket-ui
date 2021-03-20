@@ -1,3 +1,7 @@
+<svelte:head>
+	<title>Pocket - Upload</title>
+</svelte:head>
+
 <script>
   import { createPost } from '$api';
   import { user } from '$store';

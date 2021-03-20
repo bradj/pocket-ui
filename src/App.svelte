@@ -11,7 +11,7 @@ import Router from 'svelte-spa-router';
 </script>
 
 <Nav />
-<section class="section">
+<section class="section mt-6">
   <Router {routes} />
 </section>
 <footer class="footer">
@@ -21,6 +21,3 @@ import Router from 'svelte-spa-router';
     </p>
   </div>
 </footer>
-
-<style>
-</style>

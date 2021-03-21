@@ -46,7 +46,7 @@ export const logout = async () => {
   push('/login');
 }
 
-export const getFeed = async (username) => {
+export const getUserFeed = async (username) => {
   try {
     const res = await fetch(getUrl(`/u/${username}`), {
       method: 'GET'
@@ -54,6 +54,25 @@ export const getFeed = async (username) => {
 
     if (!res.ok) {
       console.log('Get Feed error', res.status, res.statusText);
+      return;
+    }
+
+    const body = await res.json();
+
+    currentFeed.set(body);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export const getInstanceFeed = async () => {
+  try {
+    const res = await fetch(getUrl(`/p/`), {
+      method: 'GET'
+    });
+
+    if (!res.ok) {
+      console.log('Instance Feed error', res.status, res.statusText);
       return;
     }
 

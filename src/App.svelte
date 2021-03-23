@@ -19,5 +19,8 @@ import Router from 'svelte-spa-router';
     <p>
       <strong>Pocket</strong> by <a href="bradjanke.com">Brad Janke</a>.
     </p>
+    <p>
+      User Icon by <a href="https://www.flaticon.com/authors/vitaly-gorbachev" title="Vitaly Gorbachev">Vitaly Gorbachev</a>
+    </p>
   </div>
 </footer>

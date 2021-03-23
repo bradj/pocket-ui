@@ -1,8 +1,12 @@
 <script>
   import Feed from '$components/Feed.svelte';
   import { loggedIn,user } from '$store';
-  import { onDestroy } from 'svelte';
+  import { onDestroy, beforeUpdate } from 'svelte';
   import { push } from 'svelte-spa-router';  
+
+  beforeUpdate(() => {
+    window.scrollTo(0, 0);
+  });
 
   const loggedInUnsub = loggedIn.subscribe(value => {
 		if (value === false) {

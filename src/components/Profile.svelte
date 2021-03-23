@@ -11,9 +11,9 @@
       <div class="column is-half">
         <div class="media">
           <div class="media-left">
-            <span class="icon is-large">
-              <ion-icon name="person-outline"></ion-icon>
-            </span>
+            <figure class="image is-128x128">
+              <img src="/woman.svg" alt="Woman">
+            </figure>
           </div>
           <div class="media-content">
             <p class="title is-4">{username}</p>

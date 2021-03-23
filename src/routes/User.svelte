@@ -8,8 +8,9 @@
   export let params = {};
   
   beforeUpdate(() => {
+    window.scrollTo(0, 0);
     selectedUsername.set(params.username);
-  })
+  });
 </script>
 
 <svelte:head>

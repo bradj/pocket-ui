@@ -1,7 +1,4 @@
 <script>
-  import { user } from '$store';
-  import { onMount } from 'svelte';
-
   /**
    * Incoming Feed Item
    * @typedef {Object} FeedItem
@@ -35,11 +32,11 @@
     <figure class="image">
       <img src="{`http://localhost:8080/api${feedItem.location}`}" style="max-height: 620px;" alt="" height="620px">
     </figure>
-    <div class="columns">
+    <div class="columns is-family-sans-serif">
       <div class="column is-half">
-        <p>{feedItem.name}</p>
+        <p><a href="#/u/{feedItem.name}">{feedItem.name}</a></p>
       </div>
-      <div class="column is-half has-text-right">
+      <div class="column is-half has-text-right is-lowercase">
         {formatDate(feedItem.created_at)}
       </div>
     </div>

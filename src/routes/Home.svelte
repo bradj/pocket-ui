@@ -1,6 +1,6 @@
 <script>
   import Feed from '$components/Feed.svelte';
-  import { loggedIn,user } from '$store';
+  import { loggedIn,loggedInUser } from '$store';
   import { onDestroy, beforeUpdate } from 'svelte';
   import { push } from 'svelte-spa-router';  
 
@@ -14,7 +14,7 @@
     }
 	});
 
-  const userUnsub = user.subscribe(value => {
+  const userUnsub = loggedInUser.subscribe(value => {
 		if (!value) {
       push('/login');
     }

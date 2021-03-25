@@ -7,7 +7,6 @@
   export let username
 
   const unsubscribe = selectedUsername.subscribe(async (value) => {
-    console.log('Selected Username sub', username, value);
 		username = value;
 
     if (username) {

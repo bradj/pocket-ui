@@ -1,7 +1,7 @@
 <script>
   import Feed from '$components/Feed.svelte';
-  import Profile from '$components/Profile.svelte';
-  import { user, selectedUsername } from '$store';
+  import SmallProfile from '$components/SmallProfile.svelte';
+  import { selectedUsername } from '$store';
   import { beforeUpdate } from 'svelte';
   import { push } from 'svelte-spa-router';
 
@@ -18,6 +18,6 @@
 </svelte:head>
 
 <div class="container is-max-desktop">
-  <Profile username={params.username} />
+  <SmallProfile username={params.username} />
   <Feed username={params.username} />
 </div>

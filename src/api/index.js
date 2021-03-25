@@ -1,9 +1,21 @@
-import { currentFeed, loggedIn, user } from '$store';
+import { currentFeed, loggedIn, loggedInUser } from '$store';
 import { push } from 'svelte-spa-router';
 
 const baseURL = 'http://localhost:8080/api';
 
 const getUrl = (url) => `${baseURL}${url}`;
+
+const resetUserStore = () => {
+  loggedInUser.set(null);
+  loggedIn.set(false);
+}
+
+const handleStatusCodes = (res) => {
+  if (res.status === 401) {
+    resetUserStore();
+    push('/login');
+  }
+}
 
 export const login = async (username, password) => {
   try {
@@ -16,17 +28,18 @@ export const login = async (username, password) => {
     });
 
     if (!res.ok) {
+      handleStatusCodes(res);
       console.log('Login error', res.status, res.statusText);
       return;
     }
 
     const body = await res.json();
 
-    user.set({ ...body.user });
+    loggedInUser.set({ ...body.user });
     loggedIn.set(true);
   } catch (error) {
     console.log(error);
-    user.set(null);
+    loggedInUser.set(null);
     loggedIn.set(false);
   }
 }
@@ -41,8 +54,7 @@ export const logout = async () => {
     return;
   }
 
-  user.set(null);
-  loggedIn.set(false);
+  resetUserStore();
   push('/login');
 }
 
@@ -53,6 +65,7 @@ export const getUserFeed = async (username) => {
     });
 
     if (!res.ok) {
+      handleStatusCodes(res);
       console.log('Get Feed error', res.status, res.statusText);
       return;
     }
@@ -72,6 +85,7 @@ export const getInstanceFeed = async () => {
     });
 
     if (!res.ok) {
+      handleStatusCodes(res);
       console.log('Instance Feed error', res.status, res.statusText);
       return;
     }
@@ -91,6 +105,7 @@ export const activeSession = async () => {
     });
 
     if (!res.ok) {
+      handleStatusCodes(res);
       console.log('Active Session error', res.status, res.statusText);
       return;
     }
@@ -98,10 +113,10 @@ export const activeSession = async () => {
     const body = await res.json();
 
     loggedIn.set(true);
-    user.set({ ...body })
+    loggedInUser.set({ ...body })
   } catch (error) {
     loggedIn.set(false);
-    user.set(null);
+    loggedInUser.set(null);
   }
 }
 
@@ -118,11 +133,35 @@ export const createPost = async (username, file, caption) => {
     });
 
     if (!res.ok) {
+      handleStatusCodes(res);
       console.log('Upload error', res.status, res.statusText);
       return false;
     }
   } catch (error) {
     console.log('Upload error', error);
+    return false;
+  }
+
+  return true;
+}
+
+export const updateProfile = async (username, tagline, email, avatar) => {
+  try {
+    const res = await fetch(getUrl(`/u/${username}/profile`), {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ username, tagline, email, avatar })
+    });
+
+    if (!res.ok) {
+      handleStatusCodes(res);
+      console.log('Upload error', res.status, res.statusText);
+      return false;
+    }
+  } catch (error) {
+    console.log('Profile update error', error);
     return false;
   }
 

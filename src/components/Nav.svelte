@@ -2,15 +2,18 @@
   import { logout } from '$api';
   import { loggedIn } from '$store';
   import { link,push } from 'svelte-spa-router';
-  import { user, selectedUsername } from '$store';
+  import { loggedInUser, selectedUsername } from '$store';
 
   const uploadClick = () => {
     push('/upload');
   }
 
+  const logoutClick = async () => {
+    await logout();
+  }
+
   const profileClick = () => {
-    selectedUsername.set($user.username);
-    push(`/u/${$user.username}`);
+    push(`/profile`);
   }
 
   const logoClick = () => {
@@ -51,17 +54,25 @@
           {:else}
           <div class="field has-addons">
             <p class="control">
-              <button class="button is-outlined is-rounded" on:click="{uploadClick}">
+              <button class="button is-rounded" on:click="{uploadClick}">
                 <span class="icon">
                   <ion-icon name="cloud-upload-outline"></ion-icon>
                 </span>
               </button>
             </p>
             <p class="control">
-              <button class="button it-outlined is-info is-rounded" on:click="{profileClick}">
+              <button class="button is-rounded" on:click="{profileClick}">
                 <span class="icon">
                   <ion-icon name="person-outline"></ion-icon>
                 </span>
+              </button>
+            </p>
+            <p class="control">
+              <button class="button is-rounded is-warning" on:click="{logoutClick}">
+                <span class="icon">
+                  <ion-icon name="log-out-outline"></ion-icon>
+                </span>
+                <span>Logout</span>
               </button>
             </p>
           </div>

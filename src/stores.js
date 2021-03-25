@@ -7,6 +7,7 @@ import { writable } from 'svelte/store';
  * @property {string} username - username
  * @property {string} email - email
  * @property {string} id - Account ID
+ * @property {string} avatar_location - URL to user avatar
  * @property {Date} created_at - Post creation date
  * @property {Date} updated_at - Post creation date
  * @property {boolean} is_disabled - Is this account disabled
@@ -15,7 +16,7 @@ import { writable } from 'svelte/store';
 /**
  * @type {User}
  */
-export const user = writable(null);
+export const loggedInUser = writable(null);
 /**
  * @type {boolean}
  */

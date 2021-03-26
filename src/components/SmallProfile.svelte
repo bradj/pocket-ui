@@ -6,6 +6,8 @@
 
   const unsubAccount = selectedAccount.subscribe(value => {
     account = value;
+
+    console.log('account', account);
   });
 
   const unsubFeed = currentFeed.subscribe(value => {
@@ -28,7 +30,7 @@
           </div>
           <div class="media-content">
             <p class="title is-4">{account?.username || ''}</p>
-            <p class="subtitle is-6">{account?.username || ''}</p>
+            <p class="subtitle is-6">{account?.tagline || ''}</p>
           </div>
         </div>
       </div>

@@ -1,23 +1,17 @@
 <script>
   import FeedItem from '$components/FeedItem.svelte';
-  import { getUserFeed, getInstanceFeed } from '$api';
-  import { currentFeed,selectedUsername } from '$store';
-  import { onMount, onDestroy, beforeUpdate } from 'svelte';
+  import { onDestroy } from 'svelte';
+  import { currentFeed} from '$store';
 
-  export let username
+  let feed;
 
-  const unsubscribe = selectedUsername.subscribe(async (value) => {
-		username = value;
+  const unsubFeed = currentFeed.subscribe(value => {
+    feed = value;
+  });
 
-    if (username) {
-        await getUserFeed(username);
-      } else {
-        await getInstanceFeed();
-      }
-	});
-  onDestroy(unsubscribe);
+  onDestroy(unsubFeed);
 </script>
 
-{#each $currentFeed as item}
+{#each feed as item}
 <FeedItem feedItem="{item}" />
 {/each}

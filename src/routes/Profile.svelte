@@ -1,5 +1,4 @@
 <script>
-  import { loggedInUser } from '$store';
   import Profile from '$components/Profile.svelte';
 </script>
 

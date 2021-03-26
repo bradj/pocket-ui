@@ -1,5 +1,6 @@
 <script>
 	import { activeSession } from '$api';
+  import { currentFeed,activeAccount } from '$store';
   import Nav from '$components/Nav.svelte';
   import routes from '$root/routes';
   import { beforeUpdate } from 'svelte';

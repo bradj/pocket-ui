@@ -2,7 +2,6 @@
   import { logout } from '$api';
   import { loggedIn } from '$store';
   import { link,push } from 'svelte-spa-router';
-  import { loggedInUser, selectedUsername } from '$store';
 
   const uploadClick = () => {
     push('/upload');
@@ -17,7 +16,6 @@
   }
 
   const logoClick = () => {
-    selectedUsername.set(null);
     push(`/`);
   }
 </script>

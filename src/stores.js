@@ -1,8 +1,8 @@
 import { writable } from 'svelte/store';
 
 /**
- * User
- * @typedef {Object} User
+ * Account
+ * @typedef {Object} Account
  * @type {object}
  * @property {string} username - username
  * @property {string} email - email
@@ -14,12 +14,15 @@ import { writable } from 'svelte/store';
  */
 
 /**
- * @type {User}
+ * @type {Account}
  */
-export const loggedInUser = writable(null);
+export const activeAccount = writable(null);
 /**
  * @type {boolean}
  */
 export const loggedIn = writable(false);
 export const currentFeed = writable([]);
-export const selectedUsername = writable(null);
+/**
+ * @type {Account}
+ */
+export const selectedAccount = writable(null);

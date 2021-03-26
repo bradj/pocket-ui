@@ -4,7 +4,7 @@
 
 <script>
   import { createPost } from '$api';
-  import { loggedInUser } from '$store';
+  import { activeAccount } from '$store';
   import { push } from 'svelte-spa-router';
 
   let fileData, caption, fileObject;
@@ -28,7 +28,7 @@
     }
 
     try {
-      await createPost($loggedInUser.username, fileObject, caption || '');
+      await createPost($activeAccount.username, fileObject, caption || '');
       push('/');
     } catch (error) {
       console.log('Error uploading file', error);

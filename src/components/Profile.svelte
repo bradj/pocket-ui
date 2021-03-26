@@ -1,6 +1,6 @@
 <script>
   import { updateProfile } from '$api';
-  import { currentFeed,loggedInUser } from '$store';
+  import { currentFeed,activeAccount } from '$store';
   import { onDestroy } from 'svelte';
   import {formatDate} from '$root/util';
   
@@ -23,7 +23,7 @@
   let taglinePercentage = getTaglinePercentage(tagline);
   let taglineProgressClass = getTaglineProgressClass();
 
-  const unsubscribe = loggedInUser.subscribe(async (value) => {
+  const unsubscribe = activeAccount.subscribe(async (value) => {
     if (!value) return;
 
     const dateOptions = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -36,12 +36,12 @@
 	});
 
   const handleSave = async () => {
-    await updateProfile($loggedInUser.username, tagline, email, null);
-    const newUser = $loggedInUser;
+    await updateProfile($activeAccount.username, tagline, email, null);
+    const newUser = $activeAccount;
     newUser.email = email;
     newUser.tagline = tagline;
 
-    loggedInUser.set(newUser);
+    activeAccount.set(newUser);
   };
 
   $: {
@@ -67,7 +67,7 @@
             </figure>
           </div>
           <div class="media-content">
-            <p class="title is-4">{$loggedInUser?.username || ''}</p>
+            <p class="title is-4">{$activeAccount?.username || ''}</p>
             <p class="subtitle is-6">{tagline}</p>
           </div>
         </div>

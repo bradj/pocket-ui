@@ -3,13 +3,13 @@
 <script>
   import { onDestroy} from 'svelte';
   import {login} from '$api';
-  import { loggedInUser } from '$store';
+  import { activeAccount } from '$store';
   import { push } from 'svelte-spa-router';
 
   let username;
   let password;
 
-  const unsubscribe = loggedInUser.subscribe(value => {
+  const unsubscribe = activeAccount.subscribe(value => {
 		if (!value || !value.username || !value.email) {
       push('/login');
     } else {

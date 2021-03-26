@@ -1,11 +1,16 @@
 <script>
   import Feed from '$components/Feed.svelte';
-  import { loggedIn,loggedInUser } from '$store';
+  import { loggedIn, activeAccount, currentFeed, selectedAccount } from '$store';
   import { onDestroy, beforeUpdate } from 'svelte';
-  import { push } from 'svelte-spa-router';  
+  import { push } from 'svelte-spa-router'; 
+  import { getInstanceFeed } from '$api';
 
-  beforeUpdate(() => {
+  beforeUpdate(async () => {
     window.scrollTo(0, 0);
+    const posts = await getInstanceFeed();
+
+    currentFeed.set(posts);
+    selectedAccount.set(null);
   });
 
   const loggedInUnsub = loggedIn.subscribe(value => {
@@ -14,7 +19,7 @@
     }
 	});
 
-  const userUnsub = loggedInUser.subscribe(value => {
+  const userUnsub = activeAccount.subscribe(value => {
 		if (!value) {
       push('/login');
     }

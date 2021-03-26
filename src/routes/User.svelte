@@ -1,15 +1,18 @@
 <script>
   import Feed from '$components/Feed.svelte';
   import SmallProfile from '$components/SmallProfile.svelte';
-  import { selectedUsername } from '$store';
   import { beforeUpdate } from 'svelte';
-  import { push } from 'svelte-spa-router';
+  import { getAccountFeed } from '$api';
+  import { currentFeed, selectedAccount } from '$store';
 
   export let params = {};
   
-  beforeUpdate(() => {
+  beforeUpdate(async () => {
     window.scrollTo(0, 0);
-    selectedUsername.set(params.username);
+    const {account, posts} = await getAccountFeed(params.username);
+
+    currentFeed.set(posts);
+    selectedAccount.set(account);
   });
 </script>
 
@@ -18,6 +21,6 @@
 </svelte:head>
 
 <div class="container is-max-desktop">
-  <SmallProfile username={params.username} />
-  <Feed username={params.username} />
+  <SmallProfile />
+  <Feed username={params.username}/>
 </div>

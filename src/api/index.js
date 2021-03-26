@@ -1,4 +1,4 @@
-import { currentFeed, loggedIn, loggedInUser } from '$store';
+import { activeAccount, loggedIn } from '$store';
 import { push } from 'svelte-spa-router';
 
 const baseURL = 'http://localhost:8080/api';
@@ -6,7 +6,7 @@ const baseURL = 'http://localhost:8080/api';
 const getUrl = (url) => `${baseURL}${url}`;
 
 const resetUserStore = () => {
-  loggedInUser.set(null);
+  activeAccount.set(null);
   loggedIn.set(false);
 }
 
@@ -35,11 +35,11 @@ export const login = async (username, password) => {
 
     const body = await res.json();
 
-    loggedInUser.set({ ...body.account });
+    activeAccount.set({ ...body.account });
     loggedIn.set(true);
   } catch (error) {
     console.log(error);
-    loggedInUser.set(null);
+    activeAccount.set(null);
     loggedIn.set(false);
   }
 }
@@ -56,9 +56,9 @@ export const logout = async () => {
 
   resetUserStore();
   push('/login');
-}
+};
 
-export const getUserFeed = async (username) => {
+export const getAccountFeed = async (username) => {
   try {
     const res = await fetch(getUrl(`/u/${username}`), {
       method: 'GET'
@@ -72,10 +72,12 @@ export const getUserFeed = async (username) => {
 
     const body = await res.json();
 
-    currentFeed.set(body);
+    return body;
   } catch (error) {
     console.log(error);
   }
+
+  return null;
 }
 
 export const getInstanceFeed = async () => {
@@ -92,10 +94,12 @@ export const getInstanceFeed = async () => {
 
     const body = await res.json();
 
-    currentFeed.set(body);
+    return body;
   } catch (error) {
     console.log(error);
   }
+
+  return null;
 }
 
 export const activeSession = async () => {
@@ -113,10 +117,10 @@ export const activeSession = async () => {
     const body = await res.json();
 
     loggedIn.set(true);
-    loggedInUser.set({ ...body })
+    activeAccount.set({ ...body })
   } catch (error) {
     loggedIn.set(false);
-    loggedInUser.set(null);
+    activeAccount.set(null);
   }
 }
 

@@ -35,7 +35,7 @@ export const login = async (username, password) => {
 
     const body = await res.json();
 
-    loggedInUser.set({ ...body.user });
+    loggedInUser.set({ ...body.account });
     loggedIn.set(true);
   } catch (error) {
     console.log(error);
